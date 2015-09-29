@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.Vector;
+import java.util.stream.Stream;
 
 /**
  * Created by Marcio on 29/09/2015.
@@ -48,7 +50,8 @@ public class Graph {
                 RecursiveBacktrackingWithForwardCheckingMVR(vertexes);
                 break;
             case "d":
-                System.out.println("Backtracking com verificação adiante, MVR e grau");
+                //Backtracking com verificação adiante, MVR e grau
+                RecursiveBacktrackingWithForwardCheckingMVRandGrau(vertexes);
                 break;
         }
         return true;
@@ -126,7 +129,7 @@ public class Graph {
             return true;
 
         // Seleciona uma variável sem atribuição
-        Vertex var = assignments.stream().filter(s -> s.getColor() == 0).sorted((s1, s2)-> {
+        Vertex var = assignments.stream().filter(s -> s.getColor() == 0).sorted((s1, s2) -> {
             return s1.getNumberOfRemainingColors() - s2.getNumberOfRemainingColors();
         }).findFirst().get();
         // Nesse caso escolhemos a primeira com o menor número de valores remanescente ()
@@ -135,7 +138,34 @@ public class Graph {
             if (var.isValidColor(color) && checkRemainingValues(var, color)){// Verfica se alguma variável ficará sem valores legais
                 var.setColor(color);                // Atribui o valor à variável
                 updateRemainingColor(var, color, false);   // Atualiza as cores válidas remanescentes
-                Boolean success = RecursiveBacktrackingWithForwardChecking(assignments); // Chama o método recursivamente
+                Boolean success = RecursiveBacktrackingWithForwardCheckingMVR(assignments); // Chama o método recursivamente
+                if (success) return true;           // Se houve exito retorna true
+                var.setColor(0);                    // Caso contrário, remove a atribuição
+                updateRemainingColor(var, color, true);   // Atualiza as cores válidas remanescentes
+            }
+        }
+        return false; // Retorna false, pois n encontrou uma atribuição válida
+    }
+
+    public boolean RecursiveBacktrackingWithForwardCheckingMVRandGrau(ArrayList<Vertex> assignments){
+        if (assignments.stream().filter(s -> s.getColor() == 0).count() == 0) // Se a solução foi encontrada
+            return true;
+
+        // Acha o menor valor de MVR
+        int minimum = assignments.stream().filter(s -> s.getColor() == 0).mapToInt(s -> s.getNumberOfRemainingColors()).sorted().findFirst().getAsInt();
+        // Nesse caso escolhemos a primeira com o menor número de valores remanescente
+
+        // acha o máximo grau
+        int[] list = assignments.stream().filter(s->s.getNumberOfRemainingColors() == minimum && s.getColor() == 0).mapToInt(s->s.getE()).sorted().toArray();
+        int maximum = list[list.length-1];
+
+        Vertex var = assignments.stream().filter(s->s.getNumberOfRemainingColors() == minimum && s.getE() == maximum && s.getColor() ==0).findFirst().get();
+
+        for (int color = 1; color < 5; color++) {         // Para cada elemento do domínio
+            if (var.isValidColor(color) && checkRemainingValues(var, color)){// Verfica se alguma variável ficará sem valores legais
+                var.setColor(color);                // Atribui o valor à variável
+                updateRemainingColor(var, color, false);   // Atualiza as cores válidas remanescentes
+                Boolean success = RecursiveBacktrackingWithForwardCheckingMVRandGrau(assignments); // Chama o método recursivamente
                 if (success) return true;           // Se houve exito retorna true
                 var.setColor(0);                    // Caso contrário, remove a atribuição
                 updateRemainingColor(var, color, true);   // Atualiza as cores válidas remanescentes
