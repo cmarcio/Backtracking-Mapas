@@ -37,4 +37,16 @@ public class Vertex {
     public void setColor(int color) {
         this.color = color;
     }
+
+    public int getE() {
+        return E;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public ArrayList<Edge> getEdges() {
+        return edges;
+    }
 }

@@ -47,8 +47,8 @@ public class main {
 
         System.out.print("AQUI!!\n");
 
-        //map.paintMap(heuristic);
-        //map.printMap();
-        map.printGraph();
+        map.paintMap(heuristic);
+        map.printMap();
+        //map.printGraph();
     }
 }

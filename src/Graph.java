@@ -102,12 +102,12 @@ public class Graph {
         variablesList.removeFirst(); // Remove a variável que n deu certo*/
     }
 
-    public boolean checkAssignment(Vertex region, int color) {
-        /*for (int i = 0; i < adjacencyList.get(region.getIndex()).size(); i++) { // Para cada vertice adjacente
-            if (vertex.stream().filter(s->s.getName().compareTo(adjacencyList.get(i) == 0).get)
-            if (adjacencyList.get(region.getIndex()).get(i).getColor() == color) // Se a cor já está atribuida em um vértice
+    public boolean checkAssignment(Vertex vertex, int color) {
+        for (int i = 0; i < vertex.getE(); i++) { // Para cada vertice adjacente
+            String edgeName = vertex.getEdges().get(i).getName(); // Copia o nome do vértice destino
+            if (vertexes.stream().filter(s->s.getName().compareTo(edgeName) == 0).filter(s->s.color == color).count() != 0)
                 return false;
-        }*/
+        }
         return true;
     }
 
@@ -118,10 +118,10 @@ public class Graph {
         }
     }
 
-    /*public void printMap(){
-        for(int i  = 0; i < size; i++){
-            System.out.print(vertex.get(i).getName()+":");
-            int color = vertex.get(i).getColor();
+    public void printMap(){
+        for(int i  = 0; i < V; i++){
+            System.out.print(vertexes.get(i).getName()+": ");
+            int color = vertexes.get(i).getColor();
             switch (color){
                 case 1:
                     System.out.println("Azul.");
@@ -140,5 +140,5 @@ public class Graph {
                     break;
             }
         }
-    }*/
+    }
 }
