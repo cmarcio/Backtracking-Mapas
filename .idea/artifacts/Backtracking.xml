@@ -1,6 +1,10 @@
 <component name="ArtifactManager">
-  <artifact type="jar" build-on-make="true" name="Backtracking">
-    <output-path>$PROJECT_DIR$/out/artifacts/Backtracking</output-path>
-    <root id="archive" name="Backtracking.jar" />
+  <artifact type="jar" build-on-make="true" name="backtracking">
+    <output-path>$PROJECT_DIR$/out/artifacts/backtracking</output-path>
+    <root id="archive" name="backtracking.jar">
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/META-INF/MANIFEST.MF" />
+      </element>
+    </root>
   </artifact>
 </component>
