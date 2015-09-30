@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="BackTracking:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/BackTracking_jar</output-path>
+    <root id="archive" name="BackTracking.jar">
+      <element id="module-output" name="BackTracking" />
+    </root>
+  </artifact>
+</component>
