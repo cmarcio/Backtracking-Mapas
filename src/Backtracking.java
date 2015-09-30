@@ -10,7 +10,7 @@ public class Backtracking {
         System.out.print("Digite o nome do arquivo de entrada:");
         //Le o nome de um arquivo de entrada
         Scanner input = new Scanner(System.in);
-        String fileName = input.nextLine();
+        String fileName = input.nextLine(); // Remove a quebra de linha
 
         // Abre um arquivo pra leitura
         File file = new File(fileName);
@@ -26,6 +26,7 @@ public class Backtracking {
         // Leitura do numero de regiões do mapa e da heurística a ser utilizada
         int size = fileReader.nextInt();
         String heuristic = fileReader.next();
+        fileReader.nextLine();
 
         String[] vertexes = new String[size];
         String[][] edges = new String[size][];
@@ -34,8 +35,6 @@ public class Backtracking {
         for (int i = 0; i < size; i++) {
             fileReader.useDelimiter(":");                                // Define ':' como delimitador
             vertexes[i] = fileReader.next();                             // Lê o nome da região do mapa
-            if (i == 0 && vertexes[i].charAt(0) == '\n')
-                vertexes[i] = vertexes[i].substring(1);             // Trata o caso do '\n' inicial
             edges[i] = fileReader.nextLine().substring(1).split(",");    // Lê o restante da linha e separa em strings
 
             // Formata os nomes
@@ -54,5 +53,6 @@ public class Backtracking {
         map.paintMap(heuristic);
         // Exibe a saída formatada
         map.printMap();
+        //map.printGraph();
     }
 }
