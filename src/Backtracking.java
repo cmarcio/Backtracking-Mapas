@@ -7,6 +7,7 @@ import java.util.Scanner;
  */
 public class Backtracking {
     public static void main(String args[]){
+        System.out.print("Digite o nome do arquivo de entrada:");
         //Le o nome de um arquivo de entrada
         Scanner input = new Scanner(System.in);
         String fileName = input.nextLine();
