@@ -1,12 +1,14 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.PrintStream;
 import java.util.Scanner;
 
 /**
  * Created by Marcio on 29/09/2015.
  */
 public class Backtracking {
-    public static void main(String args[]){
+    public static void main(String args[]) throws FileNotFoundException {
         System.out.print("Digite o nome do arquivo de entrada:");
         //Le o nome de um arquivo de entrada
         Scanner input = new Scanner(System.in);
@@ -22,6 +24,11 @@ public class Backtracking {
             System.out.println("Erro ao abrir arquivo!");
             return;
         }
+
+        // Redireciona a saída para arquivo
+        String outFileName = fileName.substring(0, fileName.indexOf(".")).concat(".out");
+        PrintStream out = new PrintStream(new FileOutputStream(new File(outFileName)));
+        System.setOut(out);
 
         // Leitura do numero de regiões do mapa e da heurística a ser utilizada
         int size = fileReader.nextInt();
