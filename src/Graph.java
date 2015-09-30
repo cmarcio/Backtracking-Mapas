@@ -129,9 +129,8 @@ public class Graph {
             return true;
 
         // Seleciona uma variável sem atribuição
-        Vertex var = assignments.stream().filter(s -> s.getColor() == 0).sorted((s1, s2) -> {
-            return s1.getNumberOfRemainingColors() - s2.getNumberOfRemainingColors();
-        }).findFirst().get();
+        int minimun = assignments.stream().filter(s -> s.getColor() == 0).mapToInt(s->s.getNumberOfRemainingColors()).sorted().findFirst().getAsInt();
+        Vertex var = assignments.stream().filter(s->s.getColor() == 0 && s.getNumberOfRemainingColors() == minimun).findFirst().get();
         // Nesse caso escolhemos a primeira com o menor número de valores remanescente ()
 
         for (int color = 1; color < 5; color++) {         // Para cada elemento do domínio
